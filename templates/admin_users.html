@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Users - Lost and Found{% endblock %}
+
+{% block content %}
+<div class="admin-users">
+    <h2>Manage Users</h2>
+    
+    <div class="users-list">
+        {% if users %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Registered On</th>
+                        <th>Lost Items</th>
+                        <th>Found Items</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user[1] }}</td>
+                        <td>{{ user[2] }}</td>
+                        <td>{{ user[3] }}</td>
+                        <td>{{ user[4] }}</td>
+                        <td>
+                            <!-- Admin actions would go here -->
+                            <button class="btn-small">View</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No users registered yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

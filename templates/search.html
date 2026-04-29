@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Search Items - Lost and Found{% endblock %}
+
+{% block content %}
+<div class="search-page">
+    <h2>Search Lost and Found Items</h2>
+    
+    <form method="GET" class="search-form">
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="">All Categories</option>
+                <option value="Books" {% if category=='Books' %}selected{% endif %}>Books</option>
+                <option value="Electronics" {% if category=='Electronics' %}selected{% endif %}>Electronics</option>
+                <option value="Documents" {% if category=='Documents' %}selected{% endif %}>Documents</option>
+                <option value="Clothing" {% if category=='Clothing' %}selected{% endif %}>Clothing</option>
+                <option value="Accessories" {% if category=='Accessories' %}selected{% endif %}>Accessories</option>
+                <option value="Other" {% if category=='Other' %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" value="{{ location }}" placeholder="Location">
+        </div>
+        
+        <div class="form-group">
+            <label for="keyword">Keyword:</label>
+            <input type="text" id="keyword" name="keyword" value="{{ keyword }}" placeholder="Item name or description">
+        </div>
+        
+        <button type="submit" class="btn-primary">Search</button>
+        <a href="{{ url_for('search') }}" class="btn-secondary">Clear</a>
+    </form>
+    
+    <div class="search-results">
+        <h3>Lost Items</h3>
+        {% if lost_items %}
+            <div class="items-list">
+                {% for item in lost_items %}
+                    <div class="item-card">
+                        <h4>{{ item[2] }}</h4>
+                        <p><strong>Category:</strong> {{ item[3] }}</p>
+                        <p><strong>Description:</strong> {{ item[4] }}</p>
+                        <p><strong>Location:</strong> {{ item[5] }}</p>
+                        <p><strong>Date Lost:</strong> {{ item[6] }}</p>
+                        <p><strong>Reported by:</strong> {{ item[8] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No lost items found matching your criteria.</p>
+        {% endif %}
+        
+        <h3>Found Items</h3>
+        {% if found_items %}
+            <div class="items-list">
+                {% for item in found_items %}
+                    <div class="item-card">
+                        <h4>{{ item[2] }}</h4>
+                        <p><strong>Category:</strong> {{ item[3] }}</p>
+                        <p><strong>Description:</strong> {{ item[4] }}</p>
+                        <p><strong>Location:</strong> {{ item[5] }}</p>
+                        <p><strong>Date Found:</strong> {{ item[6] }}</p>
+                        <p><strong>Reported by:</strong> {{ item[8] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No found items found matching your criteria.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

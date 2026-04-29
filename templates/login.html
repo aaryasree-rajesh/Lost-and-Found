@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Lost and Found{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h2>User Login / Registration</h2>
+    <p>Enter your unique ID (Student ID, Employee ID, etc.) to login or register.</p>
+    
+    <form method="POST" id="loginForm">
+        <div class="form-group">
+            <label for="user_id">Your Unique ID:</label>
+            <input type="text" id="user_id" name="user_id" required placeholder="e.g., STUDENT123, EMP001">
+        </div>
+        
+        <button type="submit" class="btn-primary">Login / Register</button>
+    </form>
+    
+    <div class="admin-login-link">
+        <p><a href="{{ url_for('admin_login') }}">Admin Login</a></p>
+    </div>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    console.log('Form submitted');
+    // Let the form submit normally
+});
+</script>
+{% endblock %}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Lost and Found{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Lost and Found System</h1>
+            {% if user_id %}
+                <div class="user-info">
+                    <span>Welcome, {{ user_id }}</span>
+                    <a href="{{ url_for('login') }}">Logout</a>
+                </div>
+            {% elif session.admin_id %}
+                <div class="user-info">
+                    <span>Admin: {{ session.admin_id }}</span>
+                    <a href="{{ url_for('admin_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            {% if user_id %}
+                <ul>
+                    <li><a href="{{ url_for('dashboard', user_id=user_id) }}">Home</a></li>
+                    <li><a href="{{ url_for('report_lost', user_id=user_id) }}">Report Lost Item</a></li>
+                    <li><a href="{{ url_for('report_found', user_id=user_id) }}">Report Found Item</a></li>
+                    <li><a href="{{ url_for('my_reports', user_id=user_id) }}">My Reports</a></li>
+                    <li><a href="{{ url_for('search', user_id=user_id) }}">Search Items</a></li>
+                </ul>
+            {% elif session.admin_id %}
+                <ul>
+                    <li><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
+                    <li><a href="{{ url_for('admin_reports') }}">Manage Reports</a></li>
+                    <li><a href="{{ url_for('admin_users') }}">Manage Users</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+    
+    <main>
+        <div class="container">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="flash-message">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Lost and Found System</p>
+        </div>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

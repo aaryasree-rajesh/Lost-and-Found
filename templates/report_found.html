@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Report Found Item - Lost and Found{% endblock %}
+
+{% block content %}
+<div class="report-form">
+    <h2>Report Found Item</h2>
+    
+    <form method="POST">
+        <div class="form-group">
+            <label for="item_name">Item Name:</label>
+            <input type="text" id="item_name" name="item_name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="">Select a category</option>
+                <option value="Books">Books</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Documents">Documents</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="location">Location Found:</label>
+            <input type="text" id="location" name="location" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="date_found">Date Found:</label>
+            <input type="date" id="date_found" name="date_found" required>
+        </div>
+        
+        <button type="submit" class="btn-primary">Submit Found Report</button>
+        <a href="{{ url_for('dashboard') }}" class="btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

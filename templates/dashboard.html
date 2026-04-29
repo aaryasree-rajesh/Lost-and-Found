@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Lost and Found{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h2>Welcome to Your Dashboard</h2>
+    <p>Hello, {{ user_id }}! Here you can manage your lost and found reports.</p>
+    
+    <div class="dashboard-options">
+        <div class="option-card">
+            <h3>Report Lost Item</h3>
+            <p>Report an item you have lost.</p>
+            <a href="{{ url_for('report_lost') }}" class="btn-primary">Report Lost</a>
+        </div>
+        
+        <div class="option-card">
+            <h3>Report Found Item</h3>
+            <p>Report an item you have found.</p>
+            <a href="{{ url_for('report_found') }}" class="btn-primary">Report Found</a>
+        </div>
+        
+        <div class="option-card">
+            <h3>My Reports</h3>
+            <p>View and manage your reports.</p>
+            <a href="{{ url_for('my_reports') }}" class="btn-primary">View Reports</a>
+        </div>
+        
+        <div class="option-card">
+            <h3>Search Items</h3>
+            <p>Search for lost or found items.</p>
+            <a href="{{ url_for('search') }}" class="btn-primary">Search Items</a>
+        </div>
+    </div>
+    
+    <div class="recent-items">
+        <h3>Recent Items</h3>
+        <p>Check back later to see recent lost and found items.</p>
+    </div>
+</div>
+{% endblock %}
